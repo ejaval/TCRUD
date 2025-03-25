@@ -1,27 +1,89 @@
-@(tareaForm: Form[Tarea])
+@import helper._
+
+@(tareaForm: Form[Tarea])(implicit messages: Messages)
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
-        <title>Crear Nueva Tarea</title>
-        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crear Tarea</title>
+        <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f9;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                }
+
+                .container {
+                    width: 90%;
+                    max-width: 600px;
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    text-align: center;
+                }
+
+                h1 {
+                    color: #333;
+                    margin-bottom: 20px;
+                }
+
+                form {
+                    text-align: left;
+                }
+
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
+
+                input, textarea, select {
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 15px;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 16px;
+                }
+
+                button {
+                    padding: 10px 15px;
+                    background-color: #28a745;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    font-size: 16px;
+                }
+
+                button:hover {
+                    background-color: #218838;
+                }
+        </style>
     </head>
     <body>
+
         <div class="container">
             <h1>Crear Nueva Tarea</h1>
-            <form action="@routes.TareaController.save" method="post">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="@tareaForm("nombre").value">
 
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion">@tareaForm("descripcion").value</textarea>
+            @form(action = routes.TareaController.save()) {
+                @inputText(tareaForm("nombre"), '_label -> "Nombre", 'placeholder -> "Nombre de la tarea")
+                @textarea(tareaForm("descripcion"), '_label -> "Descripción", 'placeholder -> "Descripción de la tarea")
+                @select(tareaForm("completada"), options = Seq("false" -> "Pendiente", "true" -> "Completada"), '_label -> "Estado")
 
-                <label for="completada">Completada:</label>
-                <input type="checkbox" id="completada" name="completada" @if(tareaForm("completada").value == "true") {checked}>
+                <button type="submit">Guardar Tarea</button>
+            }
 
-                <button type="submit">Guardar</button>
-            </form>
-            <a href="@routes.TareaController.index">Volver al Inicio</a>
+            <a href="@routes.TareaController.index">Cancelar</a>
         </div>
+
     </body>
 </html>
