@@ -10,9 +10,9 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # Rutas para el CRUD de Tareas
 GET     /tareas                  controllers.TareaController.index
-GET     /tareas/crear            controllers.TareaController.create
+GET     /tareas/crear            controllers.TareaController.create(request: Request)
 POST    /tareas                  controllers.TareaController.save(request: Request)
 GET     /tareas/:id              controllers.TareaController.show(id: Long)
-GET     /tareas/:id/editar       controllers.TareaController.edit(id: Long)
+GET     /tareas/:id/editar       controllers.TareaController.edit(id: Long, request: Request)
 POST    /tareas/:id              controllers.TareaController.update(id: Long, request: Request)
 POST    /tareas/:id/eliminar     controllers.TareaController.delete(id: Long)
