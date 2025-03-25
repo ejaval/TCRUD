@@ -1,0 +1,16 @@
+@(tarea: Tarea)
+
+<!DOCTYPE html>
+    <head>
+        <title>Detalle de la Tarea</title>
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Detalle de la Tarea</h1>
+            <p><strong>Nombre:</strong> @tarea.nombre</p>
+            <p><strong>Descripción:</strong> @tarea.descripcion</p>
+            <p><strong>Estado:</strong> @if(tarea.completada) {Completada} else {Pendiente}</p>
+            <a href="@routes.TareaController.index">Volver al Inicio</a>
+        </div>
+    </body>

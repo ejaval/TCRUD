@@ -1,0 +1,25 @@
+@(tareaForm: Form[Tarea], id: Long)
+
+<!DOCTYPE html>
+    <head>
+        <title>Editar Tarea</title>
+        <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Editar Tarea</h1>
+            <form action="@routes.TareaController.update(id)" method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="@tareaForm("nombre").value">
+
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion">@tareaForm("descripcion").value</textarea>
+
+                <label for="completada">Completada:</label>
+                <input type="checkbox" id="completada" name="completada" @if(tareaForm("completada").value == "true") {checked}>
+
+                <input type="submit" value="Actualizar">
+            </form>
+            <a href="@routes.TareaController.index">Volver al Inicio</a>
+        </div>
+    </body>
